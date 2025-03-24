@@ -1,0 +1,87 @@
+<mat-toolbar-row appearance="outlined">
+  <mat-card-content class="button-container">
+    <button mat-icon-button aria-label="arrow_back-button" routerLink="/pantalla-bitacora">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <mat-card-content class="text-container">
+      <mat-label>
+        <mat-icon class="icon-large">book</mat-icon>
+        Historial de Inicio
+      </mat-label>
+    </mat-card-content>
+    <mat-card-content>
+      <button mat-icon-button (click)="toggleFiltros()" class="filter-button" #fab>
+        <mat-icon>filter_list</mat-icon>
+      </button>
+  </mat-card-content>
+</mat-card-content>
+<button mat-icon-button (click)="toggleFiltros()" class="filter-button" #fab>
+  <mat-icon>filter_list</mat-icon>
+</button>
+
+<div class="filter-container" [class.show-filters]="filtrosVisibles">
+  <div class="filter-group">
+    <label for="usuarioFilter">Usuario:</label>
+    <input type="text" id="usuarioFilter" [(ngModel)]="filtroUsuario" (ngModelChange)="aplicarFiltros()">
+  </div>
+
+  <div class="filter-group">
+    <label for="fechaInicioMin">Inicio de Sesión (Desde):</label>
+    <input type="date" id="fechaInicioMin" [(ngModel)]="filtroFechaInicioMin" (ngModelChange)="aplicarFiltros()">
+  </div>
+
+  <div class="filter-group">
+    <label for="fechaInicioMax">Inicio de Sesión (Hasta):</label>
+    <input type="date" id="fechaInicioMax" [(ngModel)]="filtroFechaInicioMax" (ngModelChange)="aplicarFiltros()">
+  </div>
+
+    <div class="filter-group">
+        <label for="estadoFilter">Estado:</label>
+        <select id="estadoFilter" [(ngModel)]="filtroEstado" (ngModelChange)="aplicarFiltros()">
+            <option value="">Cualquiera</option>
+            <option value="Success">Success</option>
+            <option value="Failed">Failed</option>
+        </select>
+    </div>
+
+  <button mat-button color="primary" (click)="limpiarFiltros()" class="clear-filters-button">
+    Limpiar Filtros
+  </button>
+</div>
+</mat-toolbar-row>
+<mat-card appearance="outlined">
+<mat-card-content>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
+        <td mat-cell *matCellDef="let row"> {{row.username}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="loginTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Login Time </th>
+        <td mat-cell *matCellDef="let row"> {{row.loginTime | date:'medium'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="logoutTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Logout Time </th>
+        <td mat-cell *matCellDef="let row"> {{row.logoutTime ? (row.logoutTime | date:'medium') : 'N/A'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <td mat-cell *matCellDef="let row"> {{row.status}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of session logs"></mat-paginator>
+  </div>
+</mat-card-content>
+</mat-card>

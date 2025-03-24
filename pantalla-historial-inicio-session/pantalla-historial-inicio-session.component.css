@@ -1,0 +1,90 @@
+.button-container {
+  display: flex;
+  justify-content: space-between;  /* Distribuye el espacio entre elementos*/
+  align-items: center; /*Centra verticalmente*/
+  padding: 8px;
+}
+.text-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente*/
+  align-items: center;    /* Centra verticalmente*/
+  height: 100%;
+  font-size: 40px; /* Tamaño de fuente*/
+}
+.icon-large {
+  height: 100%;
+  font-size: 30px; /* tamaño */
+}
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+/* Estilo para el botón de filtro (ajusta según tu diseño) */
+.filter-button {
+  /* Posiciona el botón, por ejemplo, fijo en la esquina superior derecha */
+  position: fixed;
+  top: 10px; /* Ajusta según sea necesario */
+  right: 10px; /* Ajusta según sea necesario */
+  z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+}
+
+/* Contenedor principal del filtro */
+.filter-container {
+  position: absolute; /* O 'fixed', dependiendo de dónde quieras que aparezca */
+  top: 60px;        /* Ajusta para que esté debajo del botón, o donde lo necesites */
+  right: 10px;       /* Ajusta según sea necesario */
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 999;  /* Un poco menos que el botón para que quede debajo si se superponen*/
+
+  /* Inicialmente oculto */
+  display: none;
+  /*Transiciones*/
+  opacity: 0;
+  transform: translateY(-10px); /* Empieza un poco arriba */
+  transition: opacity 0.3s ease, transform 0.3s ease, display 0s ease 0.3s;
+
+}
+
+/* Clase para mostrar el filtro */
+.filter-container.show-filters {
+  display: block; /* Cambia a visible */
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Sin retraso al mostrar */
+}
+
+/* Estilo para cada grupo de filtro (label + input/select) */
+.filter-group {
+  margin-bottom: 10px;
+}
+
+.filter-group label{
+    margin-bottom: 5px;
+    display: block;
+
+}
+
+/* Estilo para el botón de limpiar filtros (opcional) */
+.clear-filters-button {
+  margin-top: 10px; /* Espacio por encima del botón */
+}
+
+/* Estilo para la tabla, para darle espacio al filtro fixed*/
+.mat-elevation-z8{
+  position: relative; /*Para que el filtro fixed no se superponga*/
+  /*padding-top: 250px; Espacio del filtro*/
+
+}
